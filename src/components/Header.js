@@ -11,10 +11,25 @@ import {
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles({
-  iconButton: {
+  root: {
+    backgroundColor: "#fff",
+  },
+  iconButtonRoot: {
     display: "flex",
+  },
+  searchInput: {
+    opacity: "0.6",
+    padding: "0px 8px",
+    fontSize: "0.8rem",
+    "&:hover": {
+      backgroundColor: "#f2f2f2",
+    },
+    "& .MuiSvgIcon-root": {
+      marginRight: "8px",
+    },
   },
 });
 
@@ -22,26 +37,31 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.root}>
       <Toolbar>
-        <Grid container>
+        <Grid container alignItems="center">
           <Grid item sm={6}>
-            <InputBase />
+            <InputBase
+              placeholder="Search topics"
+              className={classes.searchInput}
+              startAdornment={<SearchIcon fontSize="small" />}
+            />
           </Grid>
           {/* <Grid item sm></Grid> */}
           <Grid container item sm={6} justify="flex-end">
-            <IconButton className={classes.iconButton}>
+            {/* Bisa pake classes untuk banyak HTML didalamnya */}
+            <IconButton classes={{ root: classes.iconButtonRoot }}>
               <Badge badgeContent={4} color="secondary">
-                <NotificationsNoneIcon />
+                <NotificationsNoneIcon fontSize="small" />
               </Badge>
             </IconButton>
-            <IconButton className={classes.iconButton}>
+            <IconButton className={classes.iconButtonRoot}>
               <Badge badgeContent={3} color="primary">
-                <ChatBubbleOutlineIcon />
+                <ChatBubbleOutlineIcon fontSize="small" />
               </Badge>
             </IconButton>
-            <IconButton className={classes.iconButton}>
-              <PowerSettingsNewIcon />
+            <IconButton className={classes.iconButtonRoot}>
+              <PowerSettingsNewIcon fontSize="small" />
             </IconButton>
           </Grid>
         </Grid>
