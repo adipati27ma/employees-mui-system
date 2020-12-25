@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import SideMenu from "../components/SideMenu";
 import { CssBaseline, makeStyles } from "@material-ui/core";
