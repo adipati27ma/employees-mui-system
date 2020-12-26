@@ -49,5 +49,5 @@ export default function Pageheader(props) {
 Pageheader.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.object,
 };

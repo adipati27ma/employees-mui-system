@@ -7,11 +7,10 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 
-import SideMenu from "../components/SideMenu";
-import Header from "../components/Header";
-import Pageheader from "components/Pageheader";
+import SideMenu from "components/SideMenu";
+import Header from "components/Header";
 
-import { PeopleOutlineTwoTone } from "@material-ui/icons";
+import Employees from "pages/Employees/Employees";
 
 // bisa liat di dokumentasi customization/default-theme
 const theme = createMuiTheme({
@@ -47,7 +46,7 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
   appMain: {
-    paddingLeft: "320px",
+    paddingLeft: "120px",
     width: "100%",
   },
 });
@@ -61,11 +60,7 @@ function App() {
       <SideMenu />
       <div className={classes.appMain}>
         <Header />
-        <Pageheader
-          title="Page Header"
-          subTitle="Page description"
-          icon={<PeopleOutlineTwoTone fontSize="large" />}
-        />
+        <Employees />
       </div>
       <CssBaseline /> {/* CssBaseline untuk set border-box & margin = 0 */}
     </ThemeProvider>
