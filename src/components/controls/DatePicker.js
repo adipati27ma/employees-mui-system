@@ -22,8 +22,10 @@ function DatePicker(props) {
         disableToolbar
         variant="inline"
         inputVariant="outlined"
+        openTo="year"
+        views={["year", "month", "date"]}
         label={label}
-        format="MMM/dd/yyyy"
+        format="MMM dd, yyyy"
         name={name}
         value={value}
         onChange={(date) => onChange(convertToDefaultEventPara(name, date))}
