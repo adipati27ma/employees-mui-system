@@ -28,7 +28,7 @@ const theme = createMuiTheme({
     },
   },
   shape: {
-    borderRadius: "12px",
+    // borderRadius: "12px",
   },
   overrides: {
     MuiAppBar: {
