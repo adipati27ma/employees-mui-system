@@ -24,36 +24,45 @@ const initialFValues = {
 };
 
 export default function EmployeeForm() {
-  const validate = () => {
-    let temp = {};
-    values.fullName
-      ? (temp.fullName =
-          values.fullName.length >= 3 ? "" : "Minimum 3 characters required.")
-      : (temp.fullName = values.fullName ? "" : "This field is required.");
-
-    temp.email = /$^|.+@.+..+/.test(values.email) ? "" : "Email not valid.";
-
-    values.mobile
-      ? !isNaN(values.mobile)
-        ? (temp.mobile =
-            String(values.mobile).length > 9
+  const validate = (fieldValues = values) => {
+    let temp = { ...errors };
+    if ("fullName" in fieldValues)
+      fieldValues.fullName
+        ? (temp.fullName =
+            fieldValues.fullName.length >= 3
               ? ""
-              : "Minimum 10 number required.")
-        : (temp.mobile = "Please enter a number.")
-      : (temp.mobile = "This field is required.");
+              : "Minimum 3 characters required.")
+        : (temp.fullName = "This field is required.");
 
-    temp.departmentId =
-      values.departmentId.length != 0 ? "" : "This field is required.";
+    if ("email" in fieldValues)
+      temp.email = /$^|^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(fieldValues.email)
+        ? ""
+        : "Email not valid.";
+
+    if ("mobile" in fieldValues)
+      fieldValues.mobile
+        ? !isNaN(fieldValues.mobile)
+          ? (temp.mobile =
+              String(fieldValues.mobile).length > 9
+                ? ""
+                : "Minimum 10 number required.")
+          : (temp.mobile = "Please enter a number.")
+        : (temp.mobile = "This field is required.");
+
+    if ("departmentId" in fieldValues)
+      temp.departmentId =
+        fieldValues.departmentId.length != 0 ? "" : "This field is required.";
 
     setErrors({
       ...temp,
     });
-
-    return Object.values(temp).every((x) => x == "");
+    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
 
-  const { values, errors, setErrors, handleInputChange } = useForm(
-    initialFValues
+  const { values, errors, setErrors, handleInputChange, resetForm } = useForm(
+    initialFValues,
+    true,
+    validate
   );
 
   const handleSubmit = (e) => {
@@ -123,7 +132,7 @@ export default function EmployeeForm() {
           />
           <div>
             <Controls.Button type="submit" text="Submit" />
-            <Controls.Button text="Reset" color="default" />
+            <Controls.Button text="Reset" color="default" onClick={resetForm} />
           </div>
         </Grid>
       </Grid>

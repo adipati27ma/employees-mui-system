@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core";
 
-export function useForm(initialFValues) {
+export function useForm(initialFValues, validateOnChange = false, validate) {
   const [values, setValues] = useState(initialFValues);
   const [errors, setErrors] = useState();
 
@@ -29,6 +29,13 @@ export function useForm(initialFValues) {
         });
       }
     }
+
+    if (validateOnChange) validate({ [name]: value });
+  };
+
+  const resetForm = () => {
+    setValues(initialFValues);
+    setErrors({});
   };
 
   return {
@@ -37,6 +44,7 @@ export function useForm(initialFValues) {
     errors,
     setErrors,
     handleInputChange,
+    resetForm,
   };
 }
 
