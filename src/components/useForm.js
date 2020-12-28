@@ -5,18 +5,37 @@ import { makeStyles } from "@material-ui/core";
 
 export function useForm(initialFValues) {
   const [values, setValues] = useState(initialFValues);
+  const [errors, setErrors] = useState();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+    if (name != "mobile") {
+      setValues({
+        ...values,
+        [name]: value,
+      });
+    } else {
+      if (isNaN(value)) {
+        setValues({
+          ...values,
+          [name]: value,
+        });
+      } else {
+        const convertedMobileVal = Number(value);
+
+        setValues({
+          ...values,
+          [name]: convertedMobileVal,
+        });
+      }
+    }
   };
 
   return {
     values,
     setValues,
+    errors,
+    setErrors,
     handleInputChange,
   };
 }
@@ -32,10 +51,11 @@ const useStyles = makeStyles((theme) => ({
 
 export function Form(props) {
   const classes = useStyles();
+  const { children, ...others } = props;
 
   return (
-    <form className={classes.root} autoComplete="off">
-      {props.children}
+    <form className={classes.root} autoComplete="off" {...others}>
+      {children}
     </form>
   );
 }

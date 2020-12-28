@@ -24,10 +24,45 @@ const initialFValues = {
 };
 
 export default function EmployeeForm() {
-  const { values, handleInputChange } = useForm(initialFValues);
+  const validate = () => {
+    let temp = {};
+    values.fullName
+      ? (temp.fullName =
+          values.fullName.length >= 3 ? "" : "Minimum 3 characters required.")
+      : (temp.fullName = values.fullName ? "" : "This field is required.");
+
+    temp.email = /$^|.+@.+..+/.test(values.email) ? "" : "Email not valid.";
+
+    values.mobile
+      ? !isNaN(values.mobile)
+        ? (temp.mobile =
+            String(values.mobile).length > 9
+              ? ""
+              : "Minimum 10 number required.")
+        : (temp.mobile = "Please enter a number.")
+      : (temp.mobile = "This field is required.");
+
+    temp.departmentId =
+      values.departmentId.length != 0 ? "" : "This field is required.";
+
+    setErrors({
+      ...temp,
+    });
+
+    return Object.values(temp).every((x) => x == "");
+  };
+
+  const { values, errors, setErrors, handleInputChange } = useForm(
+    initialFValues
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) window.alert("testing...");
+  };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={6}>
           <Controls.Input
@@ -35,18 +70,21 @@ export default function EmployeeForm() {
             label="Full Name"
             value={values.fullName}
             onChange={handleInputChange}
+            error={errors ? errors.fullName : null}
           />
           <Controls.Input
             name="email"
             label="Email"
             value={values.email}
             onChange={handleInputChange}
+            error={errors ? errors.email : null}
           />
           <Controls.Input
             name="mobile"
             label="Mobile"
             value={values.mobile}
             onChange={handleInputChange}
+            error={errors ? errors.mobile : null}
           />
           <Controls.Input
             name="city"
@@ -69,6 +107,7 @@ export default function EmployeeForm() {
             value={values.departmentId}
             onChange={handleInputChange}
             option={employeeService.getDepartmentCollection()}
+            error={errors ? errors.departmentId : null}
           />
           <Controls.DatePicker
             name="hireDate"

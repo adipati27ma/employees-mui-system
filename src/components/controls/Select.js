@@ -5,13 +5,14 @@ import {
   InputLabel,
   Select as MuiSelect,
   MenuItem,
+  FormHelperText,
 } from "@material-ui/core";
 
 function Select(props) {
-  const { name, label, value, onChange, option } = props;
+  const { name, label, value, error = null, onChange, option } = props;
 
   return (
-    <FormControl variant="outlined">
+    <FormControl variant="outlined" {...(error && { error: true })}>
       <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
       <MuiSelect name={name} value={value} onChange={onChange} label={label}>
         <MenuItem value="">
@@ -23,6 +24,7 @@ function Select(props) {
           </MenuItem>
         ))}
       </MuiSelect>
+      {error && <FormHelperText>{error}</FormHelperText>}
     </FormControl>
   );
 }
@@ -31,6 +33,7 @@ Select.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
+  error: PropTypes.bool,
   onChange: PropTypes.func,
   option: PropTypes.array,
 };
