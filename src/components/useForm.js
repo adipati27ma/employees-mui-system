@@ -9,26 +9,10 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name != "mobile") {
-      setValues({
-        ...values,
-        [name]: value,
-      });
-    } else {
-      if (isNaN(value)) {
-        setValues({
-          ...values,
-          [name]: value,
-        });
-      } else {
-        const convertedMobileVal = Number(value);
-
-        setValues({
-          ...values,
-          [name]: convertedMobileVal,
-        });
-      }
-    }
+    setValues({
+      ...values,
+      [name]: value,
+    });
 
     if (validateOnChange) validate({ [name]: value });
   };

@@ -41,9 +41,9 @@ export default function EmployeeForm() {
 
     if ("mobile" in fieldValues)
       fieldValues.mobile
-        ? !isNaN(fieldValues.mobile)
+        ? /^[0-9]+$/.test(fieldValues.mobile)
           ? (temp.mobile =
-              String(fieldValues.mobile).length > 9
+              fieldValues.mobile.length > 9
                 ? ""
                 : "Minimum 10 number required.")
           : (temp.mobile = "Please enter a number.")
