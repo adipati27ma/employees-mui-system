@@ -35,7 +35,7 @@ export default function EmployeeForm() {
         : (temp.fullName = "This field is required.");
 
     if ("email" in fieldValues)
-      temp.email = /$^|^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(fieldValues.email)
+      temp.email = /$^|^.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(fieldValues.email)
         ? ""
         : "Email not valid.";
 
@@ -67,7 +67,10 @@ export default function EmployeeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) window.alert("testing...");
+    if (validate()) {
+      employeeService.insertEmployee(values);
+      resetForm();
+    }
   };
 
   return (
