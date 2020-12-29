@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -37,7 +38,7 @@ function DatePicker(props) {
 DatePicker.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.number,
+  // value: PropTypes.date, // pusing segala error, date error, func error
   onChange: PropTypes.func,
 };
 

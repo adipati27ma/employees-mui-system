@@ -18,7 +18,9 @@ module.exports = {
   },
   plugins: ["react", "import", "react-hooks"],
   ignorePatterns: ["node_modules/"],
-  rules: {},
+  rules: {
+    // "react/prop-types": 0,
+  },
   settings: {
     "import/resolver": {
       node: {
