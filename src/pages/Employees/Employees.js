@@ -3,7 +3,6 @@ import { PeopleOutlineTwoTone } from "@material-ui/icons";
 
 import PageHeader from "components/PageHeader";
 import useTable from "components/useTable";
-import EmployeeForm from "./EmployeeForm";
 import {
   makeStyles,
   Paper,
@@ -20,11 +19,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Employees() {
-  const classes = useStyles();
-  const [records, setRecords] = useState(employeeService.getAllEmployees);
+const headCells = [
+  { id: "fullName", label: "Employee Name" },
+  { id: "email", label: "Email Address (Personal)" },
+  { id: "mobile", label: "Mobile Number" },
+  { id: "department", label: "Department" },
+];
 
-  const { TblContainer } = useTable();
+export default function Employees() {
+  const classes = useStyles();
+  const [records /*setRecords*/] = useState(employeeService.getAllEmployees);
+
+  const {
+    TblContainer,
+    TblHead,
+    TblPagination,
+    recordsAfterPagingAndSorting,
+  } = useTable(records, headCells);
 
   return (
     <>
@@ -34,10 +45,10 @@ function Employees() {
         icon={<PeopleOutlineTwoTone fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
-        <EmployeeForm />
         <TblContainer>
+          <TblHead />
           <TableBody>
-            {records.map((item) => (
+            {recordsAfterPagingAndSorting().map((item) => (
               <TableRow key={item.id}>
                 <TableCell>{item.fullName}</TableCell>
                 <TableCell>{item.email}</TableCell>
@@ -47,9 +58,8 @@ function Employees() {
             ))}
           </TableBody>
         </TblContainer>
+        <TblPagination />
       </Paper>
     </>
   );
 }
-
-export default Employees;

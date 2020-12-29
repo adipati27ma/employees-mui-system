@@ -20,6 +20,8 @@ module.exports = {
   ignorePatterns: ["node_modules/"],
   rules: {
     // "react/prop-types": 0,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
   },
   settings: {
     "import/resolver": {
