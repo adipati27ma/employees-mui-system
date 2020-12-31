@@ -1,14 +1,17 @@
 import { React, useState } from "react";
-import { PeopleOutlineTwoTone } from "@material-ui/icons";
+import { PeopleOutlineTwoTone, Search } from "@material-ui/icons";
 
 import PageHeader from "components/PageHeader";
 import useTable from "components/useTable";
+import Controls from "components/controls/Controls";
 import {
+  InputAdornment,
   makeStyles,
   Paper,
   TableBody,
   TableCell,
   TableRow,
+  Toolbar,
 } from "@material-ui/core";
 import * as employeeService from "services/employeeService";
 
@@ -16,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   pageContent: {
     margin: theme.spacing(5),
     padding: theme.spacing(3),
+  },
+  searchInput: {
+    width: "75%",
   },
 }));
 
@@ -29,13 +35,25 @@ const headCells = [
 export default function Employees() {
   const classes = useStyles();
   const [records /*setRecords*/] = useState(employeeService.getAllEmployees);
+  const [filterFn, setFilterFn] = useState({ fn: (items) => items });
 
   const {
     TblContainer,
     TblHead,
     TblPagination,
     recordsAfterPagingAndSorting,
-  } = useTable(records, headCells);
+  } = useTable(records, headCells, filterFn);
+
+  const handleSearch = (e) => {
+    let target = e.target;
+    setFilterFn({
+      fn: (items) => {
+        if (target.value == "") return items;
+        else
+          return items.filter((item) => item.fullName.includes(target.value));
+      },
+    });
+  };
 
   return (
     <>
@@ -45,6 +63,20 @@ export default function Employees() {
         icon={<PeopleOutlineTwoTone fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
+        <Toolbar>
+          <Controls.Input
+            className={classes.searchInput}
+            label="Search Employees"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+            onChange={handleSearch}
+          />
+        </Toolbar>
         <TblContainer>
           <TblHead />
           <TableBody>
