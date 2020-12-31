@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     position: "absolute",
     left: "0px",
     width: "120px",
-    height: "100%",
+    minHeight: "100vh",
     backgroundColor: "#253053",
   },
 });

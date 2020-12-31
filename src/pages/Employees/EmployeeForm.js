@@ -35,7 +35,9 @@ export default function EmployeeForm() {
         : (temp.fullName = "This field is required.");
 
     if ("email" in fieldValues)
-      temp.email = /$^|^.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(fieldValues.email)
+      temp.email = /$^|^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        fieldValues.email
+      )
         ? ""
         : "Email not valid.";
 

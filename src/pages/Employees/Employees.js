@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { PeopleOutlineTwoTone, Search } from "@material-ui/icons";
 
+import EmployeeForm from "./EmployeeForm";
 import PageHeader from "components/PageHeader";
 import useTable from "components/useTable";
 import Controls from "components/controls/Controls";
@@ -63,6 +64,7 @@ export default function Employees() {
         icon={<PeopleOutlineTwoTone fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
+        <EmployeeForm />
         <Toolbar>
           <Controls.Input
             className={classes.searchInput}
