@@ -64,11 +64,14 @@ export default function EmployeeForm(props) {
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
 
-  const { values, errors, setErrors, handleInputChange, resetForm } = useForm(
-    initialFValues,
-    true,
-    validate
-  );
+  const {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    handleInputChange,
+    resetForm,
+  } = useForm(initialFValues, true, validate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,6 +79,13 @@ export default function EmployeeForm(props) {
       addOrEdit(values, resetForm);
     }
   };
+
+  useEffect(() => {
+    if (recordForEdit != null)
+      setValues({
+        ...recordForEdit,
+      });
+  }, [recordForEdit]);
 
   return (
     <Form onSubmit={handleSubmit}>
