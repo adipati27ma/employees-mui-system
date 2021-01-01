@@ -1,21 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   makeStyles,
   Typography,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import Controls from "components/controls/Controls";
-import { Close as CloseIcon } from "@material-ui/icons";
+import Controls from 'components/controls/Controls';
+import { Close as CloseIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   dialogWrapper: {
-    "& .MuiDialog-paper": {
+    '& .MuiDialog-paper': {
       padding: theme.spacing(2),
-      position: "absolute",
+      position: 'absolute',
       top: theme.spacing(0),
     },
   },
@@ -28,7 +28,7 @@ function Popup(props) {
   return (
     <Dialog open={openPopup} maxWidth="md" className={classes.dialogWrapper}>
       <DialogTitle>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: 'flex' }}>
           <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
             {title}
           </Typography>

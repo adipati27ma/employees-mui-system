@@ -1,17 +1,17 @@
-import { React, useState } from "react";
+import { React, useState } from 'react';
 import {
   PeopleOutlineTwoTone,
   Search,
   Add as AddIcon,
   EditOutlined as EditOutlinedIcon,
   DeleteOutlined as DeleteOutlinedIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-import EmployeeForm from "./EmployeeForm";
-import PageHeader from "components/PageHeader";
-import useTable from "components/useTable";
-import Controls from "components/controls/Controls";
-import Popup from "components/Popup";
+import EmployeeForm from './EmployeeForm';
+import PageHeader from 'components/PageHeader';
+import useTable from 'components/useTable';
+import Controls from 'components/controls/Controls';
+import Popup from 'components/Popup';
 import {
   InputAdornment,
   makeStyles,
@@ -20,8 +20,8 @@ import {
   TableCell,
   TableRow,
   Toolbar,
-} from "@material-ui/core";
-import * as employeeService from "services/employeeService";
+} from '@material-ui/core';
+import * as employeeService from 'services/employeeService';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -29,20 +29,20 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   searchInput: {
-    width: "75%",
+    width: '75%',
   },
   newButton: {
-    position: "absolute",
-    right: "10px",
+    position: 'absolute',
+    right: '10px',
   },
 }));
 
 const headCells = [
-  { id: "fullName", label: "Employee Name" },
-  { id: "email", label: "Email Address (Personal)" },
-  { id: "mobile", label: "Mobile Number", disableSorting: true },
-  { id: "department", label: "Department" },
-  { id: "actions", label: "Actions", disableSorting: true },
+  { id: 'fullName', label: 'Employee Name' },
+  { id: 'email', label: 'Email Address (Personal)' },
+  { id: 'mobile', label: 'Mobile Number', disableSorting: true },
+  { id: 'department', label: 'Department' },
+  { id: 'actions', label: 'Actions', disableSorting: true },
 ];
 
 export default function Employees() {
@@ -63,7 +63,7 @@ export default function Employees() {
     let target = e.target;
     setFilterFn({
       fn: (items) => {
-        if (target.value == "") return items;
+        if (target.value == '') return items;
         else
           return items.filter((item) => item.fullName.includes(target.value));
       },

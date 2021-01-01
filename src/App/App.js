@@ -1,30 +1,30 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import './App.css';
 import {
   createMuiTheme,
   CssBaseline,
   makeStyles,
   ThemeProvider,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import SideMenu from "components/SideMenu";
-import Header from "components/Header";
+import SideMenu from 'components/SideMenu';
+import Header from 'components/Header';
 
-import Employees from "pages/Employees/Employees";
+import Employees from 'pages/Employees/Employees';
 
 // bisa liat di dokumentasi customization/default-theme
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#333996",
-      light: "#3c44b126",
+      main: '#333996',
+      light: '#3c44b126',
     },
     secondary: {
-      main: "#f83245",
-      light: "#f8324526",
+      main: '#f83245',
+      light: '#f8324526',
     },
     background: {
-      default: "#f4f5fd",
+      default: '#f4f5fd',
     },
   },
   shape: {
@@ -33,7 +33,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
       root: {
-        transform: "translateZ(0)",
+        transform: 'translateZ(0)',
       },
     },
   },
@@ -46,8 +46,8 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
   appMain: {
-    paddingLeft: "120px",
-    width: "100%",
+    paddingLeft: '120px',
+    width: '100%',
   },
 });
 

@@ -1,25 +1,25 @@
-import { React, useEffect } from "react";
-import PropTypes from "prop-types";
-import { Grid } from "@material-ui/core";
+import { React, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Grid } from '@material-ui/core';
 
-import { useForm, Form } from "components/useForm";
-import Controls from "components/controls/Controls";
-import * as employeeService from "services/employeeService";
+import { useForm, Form } from 'components/useForm';
+import Controls from 'components/controls/Controls';
+import * as employeeService from 'services/employeeService';
 
 const genderItems = [
-  { id: "male", title: "Male" },
-  { id: "female", title: "Female" },
-  { id: "other", title: "Other" },
+  { id: 'male', title: 'Male' },
+  { id: 'female', title: 'Female' },
+  { id: 'other', title: 'Other' },
 ];
 
 const initialFValues = {
   id: 0,
-  fullName: "",
-  email: "",
-  mobile: "",
-  city: "",
-  gender: "male",
-  departmentId: "",
+  fullName: '',
+  email: '',
+  mobile: '',
+  city: '',
+  gender: 'male',
+  departmentId: '',
   hireDate: new Date(),
   isPermanent: false,
 };
@@ -29,39 +29,39 @@ export default function EmployeeForm(props) {
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ("fullName" in fieldValues)
+    if ('fullName' in fieldValues)
       fieldValues.fullName
         ? (temp.fullName =
             fieldValues.fullName.length >= 3
-              ? ""
-              : "Minimum 3 characters required.")
-        : (temp.fullName = "This field is required.");
+              ? ''
+              : 'Minimum 3 characters required.')
+        : (temp.fullName = 'This field is required.');
 
-    if ("email" in fieldValues)
+    if ('email' in fieldValues)
       temp.email = /$^|^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         fieldValues.email
       )
-        ? ""
-        : "Email not valid.";
+        ? ''
+        : 'Email not valid.';
 
-    if ("mobile" in fieldValues)
+    if ('mobile' in fieldValues)
       fieldValues.mobile
         ? /^[0-9]+$/.test(fieldValues.mobile)
           ? (temp.mobile =
               fieldValues.mobile.length > 9
-                ? ""
-                : "Minimum 10 number required.")
-          : (temp.mobile = "Please enter a number.")
-        : (temp.mobile = "This field is required.");
+                ? ''
+                : 'Minimum 10 number required.')
+          : (temp.mobile = 'Please enter a number.')
+        : (temp.mobile = 'This field is required.');
 
-    if ("departmentId" in fieldValues)
+    if ('departmentId' in fieldValues)
       temp.departmentId =
-        fieldValues.departmentId.length != 0 ? "" : "This field is required.";
+        fieldValues.departmentId.length != 0 ? '' : 'This field is required.';
 
     setErrors({
       ...temp,
     });
-    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
+    if (fieldValues == values) return Object.values(temp).every((x) => x == '');
   };
 
   const {
@@ -150,7 +150,7 @@ export default function EmployeeForm(props) {
           <div>
             <Controls.Button
               type="submit"
-              text={recordForEdit ? "Update" : "Add"}
+              text={recordForEdit ? 'Update' : 'Add'}
             />
             <Controls.Button text="Reset" color="default" onClick={resetForm} />
           </div>
