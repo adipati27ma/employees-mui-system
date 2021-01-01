@@ -148,7 +148,10 @@ export default function EmployeeForm(props) {
             onChange={handleInputChange}
           />
           <div>
-            <Controls.Button type="submit" text="Submit" />
+            <Controls.Button
+              type="submit"
+              text={recordForEdit ? "Update" : "Add"}
+            />
             <Controls.Button text="Reset" color="default" onClick={resetForm} />
           </div>
         </Grid>

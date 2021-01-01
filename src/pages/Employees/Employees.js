@@ -75,9 +75,11 @@ export default function Employees() {
     else employeeService.updateEmployee(employee);
 
     resetForm();
-    setRecordForEdit(null);
     setOpenPopup(false);
     setRecords(employeeService.getAllEmployees);
+    setTimeout(() => {
+      setRecordForEdit(null);
+    }, 500); // diberi sedikit delay agar tombol Add/Update tidak langsung berubah (aneh)
   };
 
   const openInPopup = (item) => {
