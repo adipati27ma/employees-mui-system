@@ -33,7 +33,7 @@ Select.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   onChange: PropTypes.func,
   option: PropTypes.array,
 };

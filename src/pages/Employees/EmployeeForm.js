@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 
@@ -25,7 +25,7 @@ const initialFValues = {
 };
 
 export default function EmployeeForm(props) {
-  const { setOpenPopup } = props;
+  const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
@@ -73,9 +73,7 @@ export default function EmployeeForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      employeeService.insertEmployee(values);
-      resetForm();
-      setOpenPopup(false);
+      addOrEdit(values, resetForm);
     }
   };
 
@@ -150,5 +148,6 @@ export default function EmployeeForm(props) {
 }
 
 EmployeeForm.propTypes = {
-  setOpenPopup: PropTypes.func,
+  addOrEdit: PropTypes.func,
+  recordForEdit: PropTypes.object,
 };

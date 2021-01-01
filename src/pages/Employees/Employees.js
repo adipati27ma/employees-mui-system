@@ -3,6 +3,8 @@ import {
   PeopleOutlineTwoTone,
   Search,
   Add as AddIcon,
+  EditOutlined as EditOutlinedIcon,
+  DeleteOutlined as DeleteOutlinedIcon,
 } from "@material-ui/icons";
 
 import EmployeeForm from "./EmployeeForm";
@@ -40,11 +42,13 @@ const headCells = [
   { id: "email", label: "Email Address (Personal)" },
   { id: "mobile", label: "Mobile Number", disableSorting: true },
   { id: "department", label: "Department" },
+  { id: "actions", label: "Actions", disableSorting: true },
 ];
 
 export default function Employees() {
   const classes = useStyles();
-  const [records /*setRecords*/] = useState(employeeService.getAllEmployees);
+  const [recordForEdit, setRecordForEdit] = useState(null);
+  const [records, setRecords] = useState(employeeService.getAllEmployees);
   const [filterFn, setFilterFn] = useState({ fn: (items) => items });
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -64,6 +68,18 @@ export default function Employees() {
           return items.filter((item) => item.fullName.includes(target.value));
       },
     });
+  };
+
+  const addOrEdit = (employee, resetForm) => {
+    employeeService.insertEmployee(employee);
+    resetForm();
+    setOpenPopup(false);
+    setRecords(employeeService.getAllEmployees);
+  };
+
+  const openInPopup = (item) => {
+    setRecordForEdit(item);
+    setOpenPopup(true);
   };
 
   return (
@@ -104,6 +120,19 @@ export default function Employees() {
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.mobile}</TableCell>
                 <TableCell>{item.department}</TableCell>
+                <TableCell>
+                  <Controls.ActionButton
+                    color="primary"
+                    onClick={() => {
+                      openInPopup(item);
+                    }}
+                  >
+                    <EditOutlinedIcon fontSize="small" />
+                  </Controls.ActionButton>
+                  <Controls.ActionButton color="secondary">
+                    <DeleteOutlinedIcon fontSize="small" />
+                  </Controls.ActionButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -116,7 +145,7 @@ export default function Employees() {
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >
-        <EmployeeForm setOpenPopup={setOpenPopup} />
+        <EmployeeForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
       </Popup>
     </>
   );

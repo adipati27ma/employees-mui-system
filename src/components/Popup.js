@@ -50,7 +50,7 @@ function Popup(props) {
 Popup.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.object,
-  openPopup: PropTypes.func.isRequired,
+  openPopup: PropTypes.bool,
   setOpenPopup: PropTypes.func,
 };
 
