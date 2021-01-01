@@ -1,4 +1,5 @@
 import { React } from "react";
+import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 
 import { useForm, Form } from "components/useForm";
@@ -23,7 +24,9 @@ const initialFValues = {
   isPermanent: false,
 };
 
-export default function EmployeeForm() {
+export default function EmployeeForm(props) {
+  const { setOpenPopup } = props;
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("fullName" in fieldValues)
@@ -72,6 +75,7 @@ export default function EmployeeForm() {
     if (validate()) {
       employeeService.insertEmployee(values);
       resetForm();
+      setOpenPopup(false);
     }
   };
 
@@ -144,3 +148,7 @@ export default function EmployeeForm() {
     </Form>
   );
 }
+
+EmployeeForm.propTypes = {
+  setOpenPopup: PropTypes.func,
+};

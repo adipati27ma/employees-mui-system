@@ -1,10 +1,15 @@
 import { React, useState } from "react";
-import { PeopleOutlineTwoTone, Search } from "@material-ui/icons";
+import {
+  PeopleOutlineTwoTone,
+  Search,
+  Add as AddIcon,
+} from "@material-ui/icons";
 
 import EmployeeForm from "./EmployeeForm";
 import PageHeader from "components/PageHeader";
 import useTable from "components/useTable";
 import Controls from "components/controls/Controls";
+import Popup from "components/Popup";
 import {
   InputAdornment,
   makeStyles,
@@ -24,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
   searchInput: {
     width: "75%",
   },
+  newButton: {
+    position: "absolute",
+    right: "10px",
+  },
 }));
 
 const headCells = [
@@ -37,6 +46,7 @@ export default function Employees() {
   const classes = useStyles();
   const [records /*setRecords*/] = useState(employeeService.getAllEmployees);
   const [filterFn, setFilterFn] = useState({ fn: (items) => items });
+  const [openPopup, setOpenPopup] = useState(false);
 
   const {
     TblContainer,
@@ -64,7 +74,6 @@ export default function Employees() {
         icon={<PeopleOutlineTwoTone fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
-        <EmployeeForm />
         <Toolbar>
           <Controls.Input
             className={classes.searchInput}
@@ -77,6 +86,13 @@ export default function Employees() {
               ),
             }}
             onChange={handleSearch}
+          />
+          <Controls.Button
+            text="Add New"
+            variant="outlined"
+            startIcon={<AddIcon />}
+            className={classes.newButton}
+            onClick={() => setOpenPopup(true)}
           />
         </Toolbar>
         <TblContainer>
@@ -94,6 +110,14 @@ export default function Employees() {
         </TblContainer>
         <TblPagination />
       </Paper>
+
+      <Popup
+        title="Employee Form"
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+      >
+        <EmployeeForm setOpenPopup={setOpenPopup} />
+      </Popup>
     </>
   );
 }
