@@ -1,7 +1,8 @@
 import { React, useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { makeStyles } from '@material-ui/core';
+
+import breakpoints from 'services/breakpoints';
 
 export function useForm(initialFValues, validateOnChange = false, validate) {
   const [values, setValues] = useState(initialFValues);
@@ -35,14 +36,14 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiFormControl-root': {
-      width: '80%',
+      width: (props) => (props.isMediumDevice ? '100%' : '80%'),
       margin: theme.spacing(1),
     },
   },
 }));
 
 export function Form(props) {
-  const classes = useStyles();
+  const classes = useStyles(breakpoints());
   const { children, ...others } = props;
 
   return (

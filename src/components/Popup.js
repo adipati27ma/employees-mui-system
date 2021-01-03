@@ -10,20 +10,31 @@ import {
 
 import Controls from 'components/controls/Controls';
 import { Close as CloseIcon } from '@material-ui/icons';
+import breakpoints from 'services/breakpoints';
 
 const useStyles = makeStyles((theme) => ({
   dialogWrapper: {
     '& .MuiDialog-paper': {
-      padding: theme.spacing(2),
+      padding: (props) =>
+        props.isSmallDevice ? theme.spacing(1) : theme.spacing(2),
       position: 'absolute',
       top: theme.spacing(0),
+    },
+    '& .MuiDialogTitle-root': {
+      paddingLeft: (props) => props.isSmallDevice && theme.spacing(1),
+      paddingRight: (props) => props.isSmallDevice && theme.spacing(1),
+    },
+    '& .MuiDialogContent-root': {
+      marginLeft: (props) => props.isSmallDevice && theme.spacing(-1),
+      paddingLeft: (props) => props.isSmallDevice && theme.spacing(1),
+      paddingRight: (props) => props.isSmallDevice && theme.spacing(2),
     },
   },
 }));
 
 function Popup(props) {
   const { title, children, openPopup, setOpenPopup } = props;
-  const classes = useStyles();
+  const classes = useStyles(breakpoints());
 
   return (
     <Dialog open={openPopup} maxWidth="md" className={classes.dialogWrapper}>

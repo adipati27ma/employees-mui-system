@@ -8,12 +8,13 @@ import {
   Badge,
   makeStyles,
 } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import SearchIcon from '@material-ui/icons/Search';
+
+import breakpoints from 'services/breakpoints';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,8 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
-  const isSmallDevice = useMediaQuery('(max-width:600px)');
-  const classes = useStyles(isSmallDevice);
+  const classes = useStyles(breakpoints());
 
   return (
     <AppBar position="static" className={classes.root}>

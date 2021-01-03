@@ -15,7 +15,6 @@ import {
   EditOutlined as EditOutlinedIcon,
   DeleteOutlined as DeleteOutlinedIcon,
 } from '@material-ui/icons';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import EmployeeForm from './EmployeeForm';
 import PageHeader from 'components/PageHeader';
@@ -26,6 +25,7 @@ import Notification from 'components/Notification';
 import ConfirmDialog from 'components/ConfirmDialog';
 
 import * as employeeService from 'services/employeeService';
+import breakpoints from 'services/breakpoints';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -70,11 +70,7 @@ const headCells = [
 ];
 
 export default function Employees() {
-  const propsClasses = {
-    isSmallDevice: useMediaQuery('(max-width:600px)'),
-    isMediumDevice: useMediaQuery('(max-width:960px)'),
-  };
-  const classes = useStyles(propsClasses);
+  const classes = useStyles(breakpoints());
 
   const [recordForEdit, setRecordForEdit] = useState(null);
   const [records, setRecords] = useState(employeeService.getAllEmployees);
