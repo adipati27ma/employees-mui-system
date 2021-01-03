@@ -52,7 +52,7 @@ function App() {
     // <></> itu sama dengan <React.Fragment></React.Fragment>
     <ThemeProvider theme={theme}>
       <Grid container>
-        <Grid item xl={2} md={1} xs={0}>
+        <Grid item xl={2} md={1} xs={false}>
           <SideMenu />
         </Grid>
         <Grid item xl={10} md={11} xs={12}>
