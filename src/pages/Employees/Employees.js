@@ -15,6 +15,7 @@ import {
   EditOutlined as EditOutlinedIcon,
   DeleteOutlined as DeleteOutlinedIcon,
 } from '@material-ui/icons';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import EmployeeForm from './EmployeeForm';
 import PageHeader from 'components/PageHeader';
@@ -28,8 +29,26 @@ import * as employeeService from 'services/employeeService';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
-    margin: theme.spacing(5), // margin = 0 di small
-    padding: theme.spacing(3),
+    margin: (props) =>
+      props.isSmallDevice
+        ? theme.spacing(1)
+        : props.isMediumDevice
+        ? theme.spacing(2)
+        : theme.spacing(5),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    paddingRight: (props) =>
+      props.isSmallDevice
+        ? theme.spacing(1)
+        : props.isMediumDevice
+        ? theme.spacing(1.5)
+        : theme.spacing(3),
+    paddingLeft: (props) =>
+      props.isSmallDevice
+        ? theme.spacing(1)
+        : props.isMediumDevice
+        ? theme.spacing(1.5)
+        : theme.spacing(3),
   },
   searchInput: {
     width: '100%',
@@ -37,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
   newButton: {
     display: 'flex',
+    marginTop: (props) =>
+      props.isMediumDevice ? theme.spacing(1.5) : theme.spacing(0),
   },
 }));
 
@@ -49,7 +70,12 @@ const headCells = [
 ];
 
 export default function Employees() {
-  const classes = useStyles();
+  const propsClasses = {
+    isSmallDevice: useMediaQuery('(max-width:600px)'),
+    isMediumDevice: useMediaQuery('(max-width:960px)'),
+  };
+  const classes = useStyles(propsClasses);
+
   const [recordForEdit, setRecordForEdit] = useState(null);
   const [records, setRecords] = useState(employeeService.getAllEmployees);
   const [filterFn, setFilterFn] = useState({ fn: (items) => items });
