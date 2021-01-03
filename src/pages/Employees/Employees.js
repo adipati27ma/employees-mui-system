@@ -1,5 +1,14 @@
 import { React, useState } from 'react';
 import {
+  InputAdornment,
+  makeStyles,
+  Paper,
+  TableBody,
+  TableCell,
+  TableRow,
+  Toolbar,
+} from '@material-ui/core';
+import {
   PeopleOutlineTwoTone,
   Search,
   Add as AddIcon,
@@ -12,15 +21,9 @@ import PageHeader from 'components/PageHeader';
 import useTable from 'components/useTable';
 import Controls from 'components/controls/Controls';
 import Popup from 'components/Popup';
-import {
-  InputAdornment,
-  makeStyles,
-  Paper,
-  TableBody,
-  TableCell,
-  TableRow,
-  Toolbar,
-} from '@material-ui/core';
+import Notification from 'components/Notification';
+import ConfirmDialog from 'components/ConfirmDialog';
+
 import * as employeeService from 'services/employeeService';
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +54,16 @@ export default function Employees() {
   const [records, setRecords] = useState(employeeService.getAllEmployees);
   const [filterFn, setFilterFn] = useState({ fn: (items) => items });
   const [openPopup, setOpenPopup] = useState(false);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: '',
+  });
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: '',
+    subTitle: '',
+  });
 
   const {
     TblContainer,
@@ -80,11 +93,30 @@ export default function Employees() {
     setTimeout(() => {
       setRecordForEdit(null);
     }, 500); // diberi sedikit delay agar tombol Add/Update tidak langsung berubah (aneh)
+    setNotify({
+      isOpen: true,
+      message: 'Submitted Successfully',
+      type: 'success',
+    });
   };
 
   const openInPopup = (item) => {
     setRecordForEdit(item);
     setOpenPopup(true);
+  };
+
+  const onDelete = (id) => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
+    employeeService.deleteEmployee(id);
+    setRecords(employeeService.getAllEmployees);
+    setNotify({
+      isOpen: true,
+      message: 'Deleted Successfully',
+      type: 'success',
+    });
   };
 
   return (
@@ -137,7 +169,17 @@ export default function Employees() {
                   >
                     <EditOutlinedIcon fontSize="small" />
                   </Controls.ActionButton>
-                  <Controls.ActionButton color="secondary">
+                  <Controls.ActionButton
+                    color="secondary"
+                    onClick={() => {
+                      setConfirmDialog({
+                        isOpen: true,
+                        title: 'Are you sure to delete this record?',
+                        subTitle: "You can't undo this operation",
+                        onConfirm: () => onDelete(item.id),
+                      });
+                    }}
+                  >
                     <DeleteOutlinedIcon fontSize="small" />
                   </Controls.ActionButton>
                 </TableCell>
@@ -155,6 +197,11 @@ export default function Employees() {
       >
         <EmployeeForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
       </Popup>
+      <Notification notify={notify} setNotify={setNotify} />
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </>
   );
 }
