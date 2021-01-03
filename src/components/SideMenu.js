@@ -1,16 +1,18 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+import React from 'react';
+
+import { makeStyles } from '@material-ui/core';
 
 // using makeStyles ----------------
 const useStyles = makeStyles({
   sideMenu: {
-    display: "flex",
-    flexDirection: "column",
-    position: "absolute",
-    left: "0px",
-    width: "120px",
-    minHeight: "100vh",
-    backgroundColor: "#253053",
+    // display: 'flex',
+    // flexDirection: 'column',
+    // position: 'absolute',
+    // left: '0px',
+    width: '100%',
+    height: '100%',
+    minHeight: '100vh',
+    backgroundColor: '#253053',
   },
 });
 

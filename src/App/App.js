@@ -3,8 +3,9 @@ import './App.css';
 import {
   createMuiTheme,
   CssBaseline,
-  makeStyles,
+  Grid,
   ThemeProvider,
+  responsiveFontSizes,
 } from '@material-ui/core';
 
 import SideMenu from 'components/SideMenu';
@@ -13,7 +14,7 @@ import Header from 'components/Header';
 import Employees from 'pages/Employees/Employees';
 
 // bisa liat di dokumentasi customization/default-theme
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: {
       main: '#333996',
@@ -44,24 +45,21 @@ const theme = createMuiTheme({
   },
 });
 
-const useStyles = makeStyles({
-  appMain: {
-    paddingLeft: '120px',
-    width: '100%',
-  },
-});
+theme = responsiveFontSizes(theme);
 
 function App() {
-  const classes = useStyles();
-
   return (
     // <></> itu sama dengan <React.Fragment></React.Fragment>
     <ThemeProvider theme={theme}>
-      <SideMenu />
-      <div className={classes.appMain}>
-        <Header />
-        <Employees />
-      </div>
+      <Grid container>
+        <Grid item xl={2} md={1} xs={0}>
+          <SideMenu />
+        </Grid>
+        <Grid item xl={10} md={11} xs={12}>
+          <Header />
+          <Employees />
+        </Grid>
+      </Grid>
       <CssBaseline /> {/* CssBaseline untuk set border-box & margin = 0 */}
     </ThemeProvider>
   );

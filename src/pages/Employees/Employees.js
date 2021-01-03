@@ -1,12 +1,12 @@
 import { React, useState } from 'react';
 import {
+  Grid,
   InputAdornment,
   makeStyles,
   Paper,
   TableBody,
   TableCell,
   TableRow,
-  Toolbar,
 } from '@material-ui/core';
 import {
   PeopleOutlineTwoTone,
@@ -28,15 +28,15 @@ import * as employeeService from 'services/employeeService';
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
-    margin: theme.spacing(5),
+    margin: theme.spacing(5), // margin = 0 di small
     padding: theme.spacing(3),
   },
   searchInput: {
-    width: '75%',
+    width: '100%',
+    display: 'flex',
   },
   newButton: {
-    position: 'absolute',
-    right: '10px',
+    display: 'flex',
   },
 }));
 
@@ -127,30 +127,34 @@ export default function Employees() {
         icon={<PeopleOutlineTwoTone fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
-        <Toolbar>
-          <Controls.Input
-            className={classes.searchInput}
-            label="Search Employees"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
-                </InputAdornment>
-              ),
-            }}
-            onChange={handleSearch}
-          />
-          <Controls.Button
-            text="Add New"
-            variant="outlined"
-            startIcon={<AddIcon />}
-            className={classes.newButton}
-            onClick={() => {
-              setOpenPopup(true);
-              setRecordForEdit(null);
-            }}
-          />
-        </Toolbar>
+        <Grid container alignItems="center">
+          <Grid item md={7} xs={12}>
+            <Controls.Input
+              className={classes.searchInput}
+              label="Search Employees"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+              onChange={handleSearch}
+            />
+          </Grid>
+          <Grid container item md={5} xs={12} justify="flex-end">
+            <Controls.Button
+              text="Add New"
+              variant="outlined"
+              startIcon={<AddIcon />}
+              className={classes.newButton}
+              onClick={() => {
+                setOpenPopup(true);
+                setRecordForEdit(null);
+              }}
+            />
+          </Grid>
+        </Grid>
         <TblContainer>
           <TblHead />
           <TableBody>

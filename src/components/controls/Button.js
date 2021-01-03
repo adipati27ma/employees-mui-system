@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Button as MuiButton, makeStyles } from "@material-ui/core";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Button as MuiButton, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(0.5),
-    "& .MuiButton-label": {
-      textTransform: "none",
+    '& .MuiButton-label': {
+      textTransform: 'none',
     },
   },
 }));
@@ -18,9 +18,9 @@ function Button(props) {
   return (
     <MuiButton
       className={classes.root}
-      variant={variant || "contained"}
-      size={size || "large"}
-      color={color || "primary"}
+      variant={variant || 'contained'}
+      size={size || 'large'}
+      color={color || 'primary'}
       onClick={onClick}
       {...others}
     >
