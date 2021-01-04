@@ -10,6 +10,7 @@ import {
 
 import SideMenu from 'components/SideMenu';
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 import Employees from 'pages/Employees/Employees';
 
@@ -58,6 +59,7 @@ function App() {
         <Grid item xl={10} md={11} xs={12}>
           <Header />
           <Employees />
+          <Footer />
         </Grid>
       </Grid>
       <CssBaseline /> {/* CssBaseline untuk set border-box & margin = 0 */}
