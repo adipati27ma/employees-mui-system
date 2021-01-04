@@ -59,6 +59,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: (props) =>
       props.isMediumDevice ? theme.spacing(1.5) : theme.spacing(0),
   },
+  tablePagination: {
+    backgroundColor: (props) =>
+      props.isSmallDevice ? theme.palette.primary.light : '#fff',
+  },
 }));
 
 const headCells = [
@@ -215,7 +219,9 @@ export default function Employees() {
             </TableBody>
           </TblContainer>
         </Grid>
-        <TblPagination />
+        <div className={classes.tablePagination}>
+          <TblPagination />
+        </div>
       </Paper>
 
       <Popup

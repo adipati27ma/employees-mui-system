@@ -18,7 +18,7 @@ import breakpoints from 'services/breakpoints';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: (props) => (props ? '#f5f9ff' : '#fff'),
+    backgroundColor: (props) => (props.isSmallDevice ? '#f5f9ff' : '#fff'),
   },
   iconButtonRoot: {
     display: 'flex',
