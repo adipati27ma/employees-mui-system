@@ -149,7 +149,7 @@ export default function Employees() {
     <>
       <PageHeader
         title="New Employee"
-        subTitle="Form design with validation"
+        subTitle="List of all new employees in your company"
         icon={<PeopleOutlineTwoTone fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
