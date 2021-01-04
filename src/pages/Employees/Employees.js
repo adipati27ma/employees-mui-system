@@ -28,6 +28,9 @@ import * as employeeService from 'services/employeeService';
 import breakpoints from 'services/breakpoints';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: '80vh',
+  },
   pageContent: {
     margin: (props) =>
       props.isSmallDevice
@@ -146,7 +149,7 @@ export default function Employees() {
   };
 
   return (
-    <>
+    <div className={classes.root}>
       <PageHeader
         title="New Employee"
         subTitle="List of all new employees in your company"
@@ -236,6 +239,6 @@ export default function Employees() {
         confirmDialog={confirmDialog}
         setConfirmDialog={setConfirmDialog}
       />
-    </>
+    </div>
   );
 }
