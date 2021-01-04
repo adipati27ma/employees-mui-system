@@ -4,7 +4,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    backgroundColor: '#e0e8ff',
+    // backgroundColor: '#e0e8ff',
     padding: theme.spacing(3),
     '& a': {
       fontWeight: 'bold',
