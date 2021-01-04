@@ -177,42 +177,44 @@ export default function Employees() {
             />
           </Grid>
         </Grid>
-        <TblContainer>
-          <TblHead />
-          <TableBody>
-            {recordsAfterPagingAndSorting().map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.fullName}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>{item.mobile}</TableCell>
-                <TableCell>{item.department}</TableCell>
-                <TableCell>
-                  <Controls.ActionButton
-                    color="primary"
-                    onClick={() => {
-                      openInPopup(item);
-                    }}
-                  >
-                    <EditOutlinedIcon fontSize="small" />
-                  </Controls.ActionButton>
-                  <Controls.ActionButton
-                    color="secondary"
-                    onClick={() => {
-                      setConfirmDialog({
-                        isOpen: true,
-                        title: 'Are you sure to delete this record?',
-                        subTitle: "You can't undo this operation",
-                        onConfirm: () => onDelete(item.id),
-                      });
-                    }}
-                  >
-                    <DeleteOutlinedIcon fontSize="small" />
-                  </Controls.ActionButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </TblContainer>
+        <Grid container style={{ overflowX: 'auto' }}>
+          <TblContainer>
+            <TblHead />
+            <TableBody>
+              {recordsAfterPagingAndSorting().map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.fullName}</TableCell>
+                  <TableCell>{item.email}</TableCell>
+                  <TableCell>{item.mobile}</TableCell>
+                  <TableCell>{item.department}</TableCell>
+                  <TableCell>
+                    <Controls.ActionButton
+                      color="primary"
+                      onClick={() => {
+                        openInPopup(item);
+                      }}
+                    >
+                      <EditOutlinedIcon fontSize="small" />
+                    </Controls.ActionButton>
+                    <Controls.ActionButton
+                      color="secondary"
+                      onClick={() => {
+                        setConfirmDialog({
+                          isOpen: true,
+                          title: 'Are you sure to delete this record?',
+                          subTitle: "You can't undo this operation",
+                          onConfirm: () => onDelete(item.id),
+                        });
+                      }}
+                    >
+                      <DeleteOutlinedIcon fontSize="small" />
+                    </Controls.ActionButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </TblContainer>
+        </Grid>
         <TblPagination />
       </Paper>
 
