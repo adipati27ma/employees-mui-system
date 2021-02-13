@@ -107,7 +107,9 @@ export default function Employees() {
       fn: (items) => {
         if (target.value == '') return items;
         else
-          return items.filter((item) => item.fullName.includes(target.value));
+          return items.filter((item) =>
+            item.fullName.toLowerCase().includes(target.value.toLowerCase())
+          );
       },
     });
   };
